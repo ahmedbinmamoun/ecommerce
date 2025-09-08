@@ -1,0 +1,14 @@
+targets:
+  $default:
+    builders:
+      injectable_generator:injectable_config_builder:
+        options:
+          # مسار ملف الـ DI اللي فيه @InjectableInit
+          generate_for:
+            - lib/config/di.dart
+          # هنا ممكن تحدد اسم الملف الناتج (اختياري)
+          output:
+            # مكان الملف الناتج
+            # هيتولّد في lib/config/di.config.dart
+            # لو عايز مكان تاني غير كده ممكن تعدله هنا
+            dir: lib/config
