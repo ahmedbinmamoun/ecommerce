@@ -4,6 +4,7 @@ import 'package:ecommerce/core/utils/app_routes.dart';
 import 'package:ecommerce/core/utils/app_theme.dart';
 import 'package:ecommerce/features/ui/auth/login/login_screen.dart';
 import 'package:ecommerce/features/ui/auth/register/register_screen.dart';
+import 'package:ecommerce/features/ui/home/tabs/home_tab/home_tab_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,10 +30,11 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        initialRoute: AppRoutes.loginRoute,
+        initialRoute: AppRoutes.homeRoute,
         routes: {
           AppRoutes.loginRoute : (context) => LoginScreen(),
-          AppRoutes.registerRoute : (context) => RegisterScreen()
+          AppRoutes.registerRoute : (context) => RegisterScreen(),
+          AppRoutes.homeRoute : (context) => HomeTab()
         },
       );
       },
