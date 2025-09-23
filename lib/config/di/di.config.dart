@@ -19,13 +19,20 @@ import '../../api/data_sources/remote/auth_remote_data_source_impl.dart'
 import '../../api/dio/dio_module.dart' as _i67;
 import '../../api/web_services.dart' as _i1069;
 import '../../data/data_sources/remote/auth_remote_data_source.dart' as _i865;
+import '../../data/data_sources/remote/category_remote_data_source.dart'
+    as _i344;
 import '../../data/repositories/auth_repository_impl.dart' as _i895;
+import '../../data/repositories/category_repository_impl.dart' as _i538;
 import '../../domain/repositories/auth_repository.dart' as _i1073;
+import '../../domain/repositories/category_repository.dart' as _i485;
+import '../../domain/use_caeses/get_all_categories_use_case.dart' as _i616;
 import '../../domain/use_caeses/login_use_case.dart' as _i608;
 import '../../domain/use_caeses/register_use_case.dart' as _i153;
 import '../../features/ui/auth/login/cubit/login_view_model.dart' as _i245;
 import '../../features/ui/auth/register/cubit/register_view_model.dart'
     as _i873;
+import '../../features/ui/home/tabs/home_tab/cubit/home_tab_view_model.dart'
+    as _i976;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -45,6 +52,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i528.PrettyDioLogger>(),
       ),
     );
+    gh.factory<_i485.CategoryRepository>(
+      () => _i538.CategoryRepositoryImpl(
+        remoteDataSource: gh<_i344.CategoryRemoteDataSource>(),
+      ),
+    );
     gh.singleton<_i1069.WebServices>(
       () => getItModule.provideWebServices(gh<_i361.Dio>()),
     );
@@ -52,9 +64,19 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i740.AuthRemoteDataSourceImpl(webServices: gh<_i1069.WebServices>()),
     );
+    gh.factory<_i616.GetAllCategoriesUseCase>(
+      () => _i616.GetAllCategoriesUseCase(
+        categoryRepository: gh<_i485.CategoryRepository>(),
+      ),
+    );
     gh.factory<_i1073.AuthRepository>(
       () => _i895.AuthRepositoryImpl(
         authRemoteDataSource: gh<_i865.AuthRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i976.HomeTabViewModel>(
+      () => _i976.HomeTabViewModel(
+        getAllCategoriesUseCase: gh<_i616.GetAllCategoriesUseCase>(),
       ),
     );
     gh.factory<_i608.LoginUseCase>(

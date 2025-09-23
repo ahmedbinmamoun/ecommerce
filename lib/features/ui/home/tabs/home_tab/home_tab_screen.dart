@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce/config/di/di.dart';
 import 'package:ecommerce/core/utils/app_assets.dart';
 import 'package:ecommerce/core/utils/app_colors.dart';
 import 'package:ecommerce/core/utils/app_styles.dart';
+import 'package:ecommerce/features/ui/home/tabs/home_tab/cubit/home_tab_view_model.dart';
 import 'package:ecommerce/features/ui/home/tabs/home_tab/widgets/banner_widget.dart';
 import 'package:ecommerce/features/ui/home/tabs/home_tab/widgets/circle_category_widget.dart';
 import 'package:ecommerce/features/ui/home/tabs/home_tab/widgets/product_card.dart';
@@ -10,9 +12,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomeTab extends StatelessWidget {
+class HomeTab extends StatefulWidget {
    HomeTab({super.key});
+
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
   TextEditingController searchController = TextEditingController();
+
+  HomeTabViewModel viewModel = getIt<HomeTabViewModel>();
 
   @override
   Widget build(BuildContext context) {
