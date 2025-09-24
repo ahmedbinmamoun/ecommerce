@@ -2,10 +2,10 @@ import 'package:ecommerce/api/model/response/common/category_dto.dart';
 import 'package:ecommerce/api/model/response/common/metadata_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'category_response_dto.g.dart';
+part 'brand_response_dto.g.dart';
 
 @JsonSerializable()
-class CategoryResponseDto {
+class BrandResponseDto {
   @JsonKey(name: "results")
   final int? results;
   @JsonKey(name: "metadata")
@@ -13,21 +13,17 @@ class CategoryResponseDto {
   @JsonKey(name: "data")
   final List<CategoryDto>? data;
 
-  CategoryResponseDto ({
+  BrandResponseDto ({
     this.results,
     this.metadata,
     this.data,
   });
 
-  factory CategoryResponseDto.fromJson(Map<String, dynamic> json) {
-    return _$CategoryResponseDtoFromJson(json);
+  factory BrandResponseDto.fromJson(Map<String, dynamic> json) {
+    return _$BrandResponseDtoFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return _$CategoryResponseDtoToJson(this);
+    return _$BrandResponseDtoToJson(this);
   }
 }
-
-
-
-

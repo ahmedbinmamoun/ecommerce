@@ -52,6 +52,7 @@ dependencies:
   readmore: ^3.0.0
   carousel_slider: ^5.0.0
   smooth_page_indicator: ^1.2.1
+  cached_network_image: ^3.4.1
 
   
   # dio: ^5.4.0

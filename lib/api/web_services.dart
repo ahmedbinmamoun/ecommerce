@@ -3,7 +3,9 @@ import 'package:ecommerce/api/api_endpoints.dart';
 import 'package:ecommerce/api/model/request/login_request.dart';
 import 'package:ecommerce/api/model/request/register_request.dart';
 import 'package:ecommerce/api/model/response/auth_response.dart';
+import 'package:ecommerce/api/model/response/brands/brand_response_dto.dart';
 import 'package:ecommerce/api/model/response/category/category_response_dto.dart';
+import 'package:ecommerce/api/model/response/products/product_response_dto.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'web_services.g.dart';
@@ -21,5 +23,10 @@ abstract class WebServices {
   @GET(ApiEndpoints.categoriesApi)
   Future<CategoryResponseDto> getAllCategories();
 
+  @GET(ApiEndpoints.brandsApi)
+  Future<BrandResponseDto> getAllBrands();
+
+  @GET(ApiEndpoints.productsApi)
+  Future<ProductResponseDto> getAllProducts();
 }
 

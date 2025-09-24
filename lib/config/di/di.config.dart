@@ -22,15 +22,19 @@ import '../../data/data_sources/remote/auth_remote_data_source.dart' as _i865;
 import '../../data/data_sources/remote/category_remote_data_source.dart'
     as _i344;
 import '../../data/repositories/auth_repository_impl.dart' as _i895;
+import '../../data/repositories/brand_repository_impl.dart' as _i90;
 import '../../data/repositories/category_repository_impl.dart' as _i538;
+import '../../data/repositories/product_repository_impl.dart' as _i876;
 import '../../domain/repositories/auth_repository.dart' as _i1073;
-import '../../domain/repositories/category_repository.dart' as _i485;
+import '../../domain/use_caeses/get_all_brands_use_case.dart' as _i524;
 import '../../domain/use_caeses/get_all_categories_use_case.dart' as _i616;
+import '../../domain/use_caeses/get_all_product_use_case.dart' as _i955;
 import '../../domain/use_caeses/login_use_case.dart' as _i608;
 import '../../domain/use_caeses/register_use_case.dart' as _i153;
 import '../../features/ui/auth/login/cubit/login_view_model.dart' as _i245;
 import '../../features/ui/auth/register/cubit/register_view_model.dart'
     as _i873;
+import '../../features/ui/home/cubit/home_screen_view_model.dart' as _i714;
 import '../../features/ui/home/tabs/home_tab/cubit/home_tab_view_model.dart'
     as _i976;
 
@@ -42,9 +46,16 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final getItModule = _$GetItModule();
+    gh.factory<_i714.HomeScreenViewModel>(() => _i714.HomeScreenViewModel());
     gh.singleton<_i361.BaseOptions>(() => getItModule.provideBaseOptions());
     gh.singleton<_i528.PrettyDioLogger>(
       () => getItModule.providePrettyDioLogger(),
+    );
+    gh.factory<_i955.GetAllProductUseCase>(
+      () => _i955.GetAllProductUseCase(productRepository: gh<InvalidType>()),
+    );
+    gh.factory<_i876.ProductRepositoryImpl>(
+      () => _i876.ProductRepositoryImpl(remoteDataSource: gh<InvalidType>()),
     );
     gh.singleton<_i361.Dio>(
       () => getItModule.provideDio(
@@ -52,9 +63,26 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i528.PrettyDioLogger>(),
       ),
     );
-    gh.factory<_i485.CategoryRepository>(
+    gh.factory<_i538.CategoryRepositoryImpl>(
       () => _i538.CategoryRepositoryImpl(
         remoteDataSource: gh<_i344.CategoryRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i90.CategoryRepositoryImpl>(
+      () => _i90.CategoryRepositoryImpl(
+        remoteDataSource: gh<_i344.CategoryRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i616.GetAllBrandsUseCase>(
+      () => _i616.GetAllBrandsUseCase(brandRepository: gh<InvalidType>()),
+    );
+    gh.factory<_i524.GetAllBrandsUseCase>(
+      () => _i524.GetAllBrandsUseCase(brandRepository: gh<InvalidType>()),
+    );
+    gh.factory<_i976.HomeTabViewModel>(
+      () => _i976.HomeTabViewModel(
+        getAllCategoriesUseCase: gh<InvalidType>(),
+        getAllBrandsUseCase: gh<dynamic>(),
       ),
     );
     gh.singleton<_i1069.WebServices>(
@@ -64,19 +92,9 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i740.AuthRemoteDataSourceImpl(webServices: gh<_i1069.WebServices>()),
     );
-    gh.factory<_i616.GetAllCategoriesUseCase>(
-      () => _i616.GetAllCategoriesUseCase(
-        categoryRepository: gh<_i485.CategoryRepository>(),
-      ),
-    );
     gh.factory<_i1073.AuthRepository>(
       () => _i895.AuthRepositoryImpl(
         authRemoteDataSource: gh<_i865.AuthRemoteDataSource>(),
-      ),
-    );
-    gh.factory<_i976.HomeTabViewModel>(
-      () => _i976.HomeTabViewModel(
-        getAllCategoriesUseCase: gh<_i616.GetAllCategoriesUseCase>(),
       ),
     );
     gh.factory<_i608.LoginUseCase>(

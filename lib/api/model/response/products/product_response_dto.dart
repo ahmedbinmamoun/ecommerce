@@ -1,33 +1,28 @@
-import 'package:ecommerce/api/model/response/common/category_dto.dart';
 import 'package:ecommerce/api/model/response/common/metadata_dto.dart';
+import 'package:ecommerce/api/model/response/common/product_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-part 'category_response_dto.g.dart';
+part 'product_response_dto.g.dart';
 
 @JsonSerializable()
-class CategoryResponseDto {
+class ProductResponseDto {
   @JsonKey(name: "results")
   final int? results;
   @JsonKey(name: "metadata")
   final MetadataDto? metadata;
   @JsonKey(name: "data")
-  final List<CategoryDto>? data;
+  final List<ProductDto>? data;
 
-  CategoryResponseDto ({
+  ProductResponseDto ({
     this.results,
     this.metadata,
     this.data,
   });
 
-  factory CategoryResponseDto.fromJson(Map<String, dynamic> json) {
-    return _$CategoryResponseDtoFromJson(json);
+  factory ProductResponseDto.fromJson(Map<String, dynamic> json) {
+    return _$ProductResponseDtoFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return _$CategoryResponseDtoToJson(this);
+    return _$ProductResponseDtoToJson(this);
   }
 }
-
-
-
-
