@@ -1,6 +1,6 @@
 import 'package:ecommerce/data/data_sources/remote/category_remote_data_source.dart';
 import 'package:ecommerce/domain/entities/response/category.dart';
-import 'package:ecommerce/domain/repositories/category_repository.dart';
+import 'package:ecommerce/domain/repositories/category/category_repository.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: CategoryRepository)

@@ -1,5 +1,5 @@
-import 'package:ecommerce/domain/entities/response/category.dart';
+import 'package:ecommerce/domain/entities/response/product.dart';
 
-abstract class  CategoryRemoteDataSource {
-  Future<List<Category>?> getAllCategories();
+abstract class  ProductRemoteDataSource {
+  Future<List<Product>?> getAllProducts();
 }

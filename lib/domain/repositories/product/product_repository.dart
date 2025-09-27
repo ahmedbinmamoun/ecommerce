@@ -1,5 +1,5 @@
-import 'package:ecommerce/domain/entities/response/category.dart';
+import 'package:ecommerce/domain/entities/response/product.dart';
 
-abstract class CategoryRepository {
-  Future<List<Category>?> getAllCategories();
+abstract class ProductRepository {
+  Future<List<Product>?> getAllProducts();
 }

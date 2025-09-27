@@ -1,15 +1,15 @@
-import 'package:ecommerce/data/data_sources/remote/category_remote_data_source.dart';
+import 'package:ecommerce/data/data_sources/remote/brand_remote_data_source.dart';
 import 'package:ecommerce/domain/entities/response/category.dart';
-import 'package:ecommerce/domain/repositories/category_repository.dart';
+import 'package:ecommerce/domain/repositories/brand/brand_repository.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable(as: CategoryRepository)
-class CategoryRepositoryImpl implements CategoryRepository{
-  CategoryRemoteDataSource remoteDataSource;
-  CategoryRepositoryImpl({required this.remoteDataSource});
+@Injectable(as: BrandRepository)
+class BrandRepositoryImpl implements BrandRepository{
+  BrandRemoteDataSource remoteDataSource;
+  BrandRepositoryImpl({required this.remoteDataSource});  
   @override
-  Future<List<Category>?> getAllCategories() {
-    return remoteDataSource.getAllCategories();
+  Future<List<Category>?> getAllBrands() {
+    return remoteDataSource.getAllBrands();
   }
 
 }

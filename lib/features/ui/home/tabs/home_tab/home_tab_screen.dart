@@ -1,147 +1,142 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/config/di/di.dart';
-import 'package:ecommerce/core/utils/app_assets.dart';
 import 'package:ecommerce/core/utils/app_colors.dart';
 import 'package:ecommerce/core/utils/app_styles.dart';
+import 'package:ecommerce/domain/entities/response/category.dart';
+import 'package:ecommerce/features/ui/home/tabs/home_tab/cubit/home_tab_states.dart';
 import 'package:ecommerce/features/ui/home/tabs/home_tab/cubit/home_tab_view_model.dart';
-import 'package:ecommerce/features/ui/home/tabs/home_tab/widgets/banner_widget.dart';
-import 'package:ecommerce/features/ui/home/tabs/home_tab/widgets/circle_category_widget.dart';
-import 'package:ecommerce/features/ui/home/tabs/home_tab/widgets/product_card.dart';
-import 'package:ecommerce/features/ui/widgets/custom_text_form_field.dart';
+import 'package:ecommerce/features/ui/widgets/category_brand_item.dart';
+import 'package:ecommerce/features/ui/widgets/main_error_widget.dart';
+import 'package:ecommerce/features/ui/widgets/main_loading_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeTab extends StatefulWidget {
-   HomeTab({super.key});
+   HomeTab({Key? key}) : super(key: key);
 
   @override
   State<HomeTab> createState() => _HomeTabState();
 }
 
 class _HomeTabState extends State<HomeTab> {
-  TextEditingController searchController = TextEditingController();
-
   HomeTabViewModel viewModel = getIt<HomeTabViewModel>();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.only(top: 6.h,left: 16.w),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset(AppAssets.routeLogo),
-                SizedBox(height: 16.h,),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 348.w,
-                      child: CustomTextFormField(
-                        controller: searchController,
-                        hintText: 'Search',
-                        prefixIcon: Icon(Icons.search),
-                        ),
-                    ),
-                    Image.asset(AppAssets.shoppingCart),
-                  ],
-                ),
-                SizedBox(height: 16.h,),
-                Padding(
-                  padding: EdgeInsets.only(right: 16.h),
-                  child: ImageSlideshow(
-                    width: double.infinity,
-                    height: 200.h,
-                    initialPage: 0,
-                    indicatorColor: AppColors.primaryColor,
-                    indicatorBackgroundColor: AppColors.whiteColor,
-                    isLoop: true,
-                    autoPlayInterval: 3000,
-                    children: [
-                      BannerWidget(bannerImage: AppAssets.announcement1),
-                      BannerWidget(bannerImage: AppAssets.announcement2),
-                      BannerWidget(bannerImage: AppAssets.announcement3),
-                    ]
-                    ),
-                ),
-                SizedBox(height: 16.h,),
-            
-                Padding(
-                  padding:  EdgeInsets.only(right: 16.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Categoris',style: AppStyles.medium14Category,),
-                      GestureDetector(
-                        onTap: (){
-                          //view all categoties
-                        },
-                        child: Text('view all',style: AppStyles.regular12Text,))  ,
-                    ],
-                  ),
-                ),
-                SizedBox(height: 16.h,),
-                CarouselSlider( 
-                  options: CarouselOptions(
-                    height: 200.h,
-                    scrollDirection: Axis.horizontal,
-                    viewportFraction: 2/7,
-                    enableInfiniteScroll: false,
-                  ),
-            
-                  items: [
-                    CircleCategoryWidget(categoryImage: AppAssets.menCategory, categoryName: 'men\’sfashion'),
-                    CircleCategoryWidget(categoryImage: AppAssets.womenCategory, categoryName: 'women\’s fashion'),
-                    CircleCategoryWidget(categoryImage: AppAssets.electronicsCategory, categoryName: 'Laptops &Electronics'),
-                    CircleCategoryWidget(categoryImage: AppAssets.menCategory, categoryName: 'men\’s fashion'),
-                    CircleCategoryWidget(categoryImage: AppAssets.womenCategory, categoryName: 'women\’s fashion'),
-                    CircleCategoryWidget(categoryImage: AppAssets.skinCareCategory, categoryName: 'Skincare'),
-                  ],
-                  ),
-                  CarouselSlider( 
-                    
-                  options: CarouselOptions(
-                    height: 200.h,
-                    scrollDirection: Axis.horizontal,
-                    viewportFraction: 2/7,
-                    enableInfiniteScroll: false,
-                  ),
-                  items: [
-                    CircleCategoryWidget(categoryImage: AppAssets.beautyCategory, categoryName: 'Beauty'),
-                    CircleCategoryWidget(categoryImage: AppAssets.headphoneCategory, categoryName: 'Headphones'),
-                    CircleCategoryWidget(categoryImage: AppAssets.electronicsCategory, categoryName: 'Laptops &Electronics'),
-                    CircleCategoryWidget(categoryImage: AppAssets.skinCareCategory, categoryName: 'Skincare'),
-                    CircleCategoryWidget(categoryImage: AppAssets.womenCategory, categoryName: 'women\’sfashion'),
-                    CircleCategoryWidget(categoryImage: AppAssets.menCategory, categoryName: 'men\’sfashion'),
-                  ],
-                  ),
-                  Text('Home Appliance',style: AppStyles.regular14Text,),
-                  SizedBox(height: 16.h,),
-                   CarouselSlider( 
-                  options: CarouselOptions(
-                    height: 200.h,
-                    scrollDirection: Axis.horizontal,
-                    viewportFraction: 2/5,
-                    enableInfiniteScroll: false,
-                   
-                  ),
-                  items: [
-                  ProductCard(productImage: AppAssets.shoesItemImage3, productName: 'Nike Air Jordon', rate: 4.7, price: 1200),
-                  ProductCard(productImage: AppAssets.shoesItemImage1, productName: 'Nike Air Jordon', rate: 4.4, price: 800),
-                  ProductCard(productImage: AppAssets.shoesItemImage2, productName: 'Nike Air Jordon', rate: 4.9, price: 1500),
-                  ProductCard(productImage: AppAssets.shoesItemImage3, productName: 'Nike Air Jordon', rate: 4.7, price: 1200),
-                  ],
-                  ),
-                  SizedBox(height: 40.h,),
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    viewModel.getCategories();
+    viewModel.getBrands();
+  }
 
-              ],
-            ),
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 16.h,
           ),
+          _buildAnnouncement(
+            images: viewModel.imagesList,
+          ),
+          SizedBox(
+            height: 24.h,
+          ),
+          _lineBreak(name: "Categories"),
+          BlocBuilder<HomeTabViewModel,HomeTabStates>(
+            bloc: viewModel,
+              builder: (context, state) {
+                if(state is CategoryErrorState){
+                  return MainErrorWidget(errorMessage: state.message,
+                  onTryAgain: (){
+                    viewModel.getCategories();
+                  },);
+                }else if(state is HomeTabSuccessState){
+                  return _buildCategoryBrandSec(state.categoriesList??[]);
+                }else {
+                  //todo: loading
+                  return const MainLoadingWidget();
+                }
+              },
+          ),
+              // child: _buildCategoryBrandSec(const CategoryBrandItem())),
+          _lineBreak(name: "Brands"),
+          BlocBuilder<HomeTabViewModel,HomeTabStates>(
+            bloc: viewModel,
+            builder: (context, state) {
+              if(state is BrandErrorState){
+                return MainErrorWidget(errorMessage: state.message,
+                  onTryAgain: (){
+                    viewModel.getCategories();
+                  },);
+              }else if(state is HomeTabSuccessState){
+                return _buildCategoryBrandSec(state.brandsList??[]);
+              }else {
+                //todo: loading
+                return const MainLoadingWidget();
+              }
+            },
+          )
+          // _buildCategoryBrandSec(const CategoryBrandItem()),
+        ],
+      ),
+    );
+  }
+
+  SizedBox _buildCategoryBrandSec(List<Category> list) {
+    return SizedBox(
+      height: 250.h,
+      width: double.infinity,
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, mainAxisSpacing: 16.h, crossAxisSpacing: 16.w),
+        itemCount: list.length,
+        scrollDirection: Axis.horizontal,
+        physics: const ScrollPhysics(),
+        itemBuilder: (context, index) {
+          return CategoryBrandItem(item: list[index] ,);
+        },
+      ),
+    );
+  }
+
+  ImageSlideshow _buildAnnouncement({
+    required List<String> images,
+  }) {
+    return ImageSlideshow(
+        indicatorColor: AppColors.primaryColor,
+        initialPage: 0,
+        indicatorBottomPadding: 15.h,
+        indicatorPadding: 8.w,
+        indicatorRadius: 5,
+        indicatorBackgroundColor: AppColors.whiteColor,
+        isLoop: true,
+        autoPlayInterval: 3000,
+        height: 190.h,
+        children: images.map((url) {
+          return Image.asset(
+            url,
+            fit: BoxFit.fill,
+          );
+        }).toList());
+  }
+
+  Widget _lineBreak({required String name}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(name, style: AppStyles.medium18Header),
+        TextButton(
+          onPressed: () {
+            //todo: navigate to all
+          },
+          child: Text("View All", style: AppStyles.regular12Text),
         )
-        ),
+      ],
     );
   }
 }

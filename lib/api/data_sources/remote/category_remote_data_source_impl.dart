@@ -3,7 +3,9 @@ import 'package:ecommerce/api/web_services.dart';
 import 'package:ecommerce/core/exception/app_exception.dart';
 import 'package:ecommerce/data/data_sources/remote/category_remote_data_source.dart';
 import 'package:ecommerce/domain/entities/response/category.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: CategoryRemoteDataSource)
 class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource{
   WebServices webServices;
   CategoryRemoteDataSourceImpl({required this.webServices});

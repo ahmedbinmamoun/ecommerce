@@ -8,8 +8,8 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class HomeTabViewModel extends Cubit<HomeTabStates>{
+  GetAllBrandsUseCase getAllBrandsUseCase;
   GetAllCategoriesUseCase getAllCategoriesUseCase ;
-  GetAllBrandsUseCase getAllBrandsUseCase ;
   HomeTabViewModel({required this.getAllCategoriesUseCase,
   required this.getAllBrandsUseCase}):super(HomeTabInitialState());
   //todo: hold data - handle logic
