@@ -1,6 +1,7 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ecommerce/config/di/di.dart';
+import 'package:ecommerce/core/cach/shared_prefs_utils.dart';
 import 'package:ecommerce/core/utils/app_assets.dart';
 import 'package:ecommerce/core/utils/app_colors.dart';
 import 'package:ecommerce/core/utils/app_routes.dart';
@@ -40,7 +41,10 @@ class _LoginScreenState extends State<LoginScreen> {
           DialogUtils.showMessage(context: context, message: state.message,title: 'Error',posActionName: 'Ok');
         }else if(state is AuthSuccessState){
           DialogUtils.hideLoading(context);
-          DialogUtils.showMessage(context: context, message: 'Login successfully',title: 'Success',posActionName: 'Ok');
+          DialogUtils.showMessage(context: context, message: 'Login successfully',title: 'Success',posActionName: 'Ok',posAction: (){
+            SharedPrefsUtils.saveData(key: 'token', value: state.authResponse.token ?? '');
+            Navigator.pushReplacementNamed(context, AppRoutes.homeRoute);
+          });
         }
       },
       child: Scaffold(
@@ -83,6 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: AppStyles.medium18White,
                               ),
                               CustomTextFormField(
+                                
                                   // isPassword: false,
                                   keyboardType: TextInputType.text,
                                   isObscureText: false,
@@ -90,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   hintStyle: AppStyles.light18HintText,
                                   filledColor: AppColors.whiteColor,
                                   controller: emailController,
-                                  validator: AppValidators.validateEmail),
+                                  validator: AppValidators.validateEmail,),
                               Text(
                                 "Password",
                                 style: AppStyles.medium18White,
