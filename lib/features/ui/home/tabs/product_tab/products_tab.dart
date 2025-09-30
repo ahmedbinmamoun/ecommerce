@@ -2,6 +2,8 @@ import 'package:ecommerce/config/di/di.dart';
 import 'package:ecommerce/core/utils/app_routes.dart';
 import 'package:ecommerce/features/ui/home/tabs/product_tab/cubit/product_tab_states.dart';
 import 'package:ecommerce/features/ui/home/tabs/product_tab/cubit/product_tab_view_model.dart';
+import 'package:ecommerce/features/ui/pages/cart/cubit/cart_states.dart';
+import 'package:ecommerce/features/ui/pages/cart/cubit/cart_view_model.dart';
 import 'package:ecommerce/features/ui/widgets/main_error_widget.dart';
 import 'package:ecommerce/features/ui/widgets/main_loading_widget.dart';
 import 'package:ecommerce/features/ui/widgets/product_tab_item.dart';

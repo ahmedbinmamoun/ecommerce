@@ -32,57 +32,59 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 16.h,
-          ),
-          _buildAnnouncement(
-            images: viewModel.imagesList,
-          ),
-          SizedBox(
-            height: 24.h,
-          ),
-          _lineBreak(name: "Categories"),
-          BlocBuilder<HomeTabViewModel,HomeTabStates>(
-            bloc: viewModel,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 16.h,
+            ),
+            _buildAnnouncement(
+              images: viewModel.imagesList,
+            ),
+            SizedBox(
+              height: 24.h,
+            ),
+            _lineBreak(name: "Categories"),
+            BlocBuilder<HomeTabViewModel,HomeTabStates>(
+              bloc: viewModel,
+                builder: (context, state) {
+                  if(state is CategoryErrorState){
+                    return MainErrorWidget(errorMessage: state.message,
+                    onTryAgain: (){
+                      viewModel.getCategories();
+                    },);
+                  }else if(state is HomeTabSuccessState){
+                    return _buildCategoryBrandSec(state.categoriesList??[]);
+                  }else {
+                    //todo: loading
+                    return const MainLoadingWidget();
+                  }
+                },
+            ),
+                // child: _buildCategoryBrandSec(const CategoryBrandItem())),
+            _lineBreak(name: "Brands"),
+            BlocBuilder<HomeTabViewModel,HomeTabStates>(
+              bloc: viewModel,
               builder: (context, state) {
-                if(state is CategoryErrorState){
+                if(state is BrandErrorState){
                   return MainErrorWidget(errorMessage: state.message,
-                  onTryAgain: (){
-                    viewModel.getCategories();
-                  },);
+                    onTryAgain: (){
+                      viewModel.getCategories();
+                    },);
                 }else if(state is HomeTabSuccessState){
-                  return _buildCategoryBrandSec(state.categoriesList??[]);
+                  return _buildCategoryBrandSec(state.brandsList??[]);
                 }else {
                   //todo: loading
                   return const MainLoadingWidget();
                 }
               },
-          ),
-              // child: _buildCategoryBrandSec(const CategoryBrandItem())),
-          _lineBreak(name: "Brands"),
-          BlocBuilder<HomeTabViewModel,HomeTabStates>(
-            bloc: viewModel,
-            builder: (context, state) {
-              if(state is BrandErrorState){
-                return MainErrorWidget(errorMessage: state.message,
-                  onTryAgain: (){
-                    viewModel.getCategories();
-                  },);
-              }else if(state is HomeTabSuccessState){
-                return _buildCategoryBrandSec(state.brandsList??[]);
-              }else {
-                //todo: loading
-                return const MainLoadingWidget();
-              }
-            },
-          )
-          // _buildCategoryBrandSec(const CategoryBrandItem()),
-        ],
+            )
+            // _buildCategoryBrandSec(const CategoryBrandItem()),
+          ],
+        ),
       ),
     );
   }

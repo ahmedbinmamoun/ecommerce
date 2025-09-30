@@ -4,6 +4,7 @@ import 'package:ecommerce/core/utils/app_colors.dart';
 import 'package:ecommerce/core/utils/app_styles.dart';
 import 'package:ecommerce/features/ui/home/cubit/home_screen_states.dart';
 import 'package:ecommerce/features/ui/home/cubit/home_screen_view_model.dart';
+import 'package:ecommerce/features/ui/pages/cart/cubit/cart_view_model.dart';
 import 'package:ecommerce/features/ui/widgets/custom_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

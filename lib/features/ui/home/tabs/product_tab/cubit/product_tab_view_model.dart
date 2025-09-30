@@ -1,11 +1,12 @@
 import 'package:ecommerce/core/exception/app_exception.dart';
+import 'package:ecommerce/domain/use_caeses/get_all_product_use_case.dart';
 import 'package:ecommerce/features/ui/home/tabs/product_tab/cubit/product_tab_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class ProductTabViewModel extends Cubit<ProductTabStates>{
-  GetAllProductsUseCase getAllProductsUseCase ;
+  GetAllProductUseCase getAllProductsUseCase ;
   ProductTabViewModel({required this.getAllProductsUseCase}):super(ProductLoadingState());
   //todo: hold data - handle logic
 
